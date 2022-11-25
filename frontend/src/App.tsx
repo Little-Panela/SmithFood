@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { EditItemModal } from "./components/EditItemModal";
 import { MenuColumn } from "./components/Menu";
+import { MenuItemData } from "./components/MenuItem";
 
 const menuItems = [
   {
+    id: "1",
     image:
       "https://www.tastingtable.com/img/gallery/the-best-coffee-shop-in-every-state/intro-1639519645.jpg",
     title: "Café",
@@ -12,6 +14,7 @@ const menuItems = [
     sells: 0,
   },
   {
+    id: "2",
     image:
       "https://www.tastingtable.com/img/gallery/the-best-coffee-shop-in-every-state/intro-1639519645.jpg",
     title: "Café com leite",
@@ -20,6 +23,7 @@ const menuItems = [
     sells: 3,
   },
   {
+    id: "3",
     image:
       "https://www.tastingtable.com/img/gallery/the-best-coffee-shop-in-every-state/intro-1639519645.jpg",
     title: "Café Premium",
@@ -31,6 +35,7 @@ const menuItems = [
 
 function App() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({} as MenuItemData);
 
   return (
     <main className="area min-h-fit flex flex-col items-center gap-5">
@@ -40,20 +45,24 @@ function App() {
           menuItems={menuItems}
           label="Entradas"
           setIsEditModalOpen={setIsEditModalOpen}
+          setSelectedItem={setSelectedItem}
         />
         <MenuColumn
           menuItems={menuItems}
           label="Pratos"
           setIsEditModalOpen={setIsEditModalOpen}
+          setSelectedItem={setSelectedItem}
         />
         <MenuColumn
           menuItems={menuItems}
           label="Bebidas"
           setIsEditModalOpen={setIsEditModalOpen}
+          setSelectedItem={setSelectedItem}
         />
       </div>
       <EditItemModal
         isOpen={isEditModalOpen}
+        selectedItem={selectedItem}
         onClose={() => setIsEditModalOpen(false)}
       />
       <BgCircles />

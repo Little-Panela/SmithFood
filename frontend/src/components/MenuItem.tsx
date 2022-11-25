@@ -1,6 +1,7 @@
 import { Pencil } from "phosphor-react";
 
 export interface MenuItemData {
+  id: string;
   image: string;
   title: string;
   price: number;
@@ -10,16 +11,24 @@ export interface MenuItemData {
 
 export interface MenuItemProps extends MenuItemData {
   setIsEditModalOpen: (isOpen: boolean) => void;
+  setSelectedItem: (item: MenuItemData) => void;
 }
 
 export function MenuItem({
+  id,
   title,
   price,
   image,
   stock,
   sells,
   setIsEditModalOpen,
+  setSelectedItem,
 }: MenuItemProps) {
+  function openEditModal() {
+    setSelectedItem({ id, title, price, image, stock, sells });
+    setIsEditModalOpen(true);
+  }
+
   return (
     <li className="glasmorphism z-10 w-96 max-h-32 flex items-center">
       <img
@@ -32,9 +41,9 @@ export function MenuItem({
           <h1 className="text-2xl">{title}</h1>
           <Pencil
             size={24}
-            className="absolute right-0 text-white top-0 cursor-pointer"
+            className="absolute right-0 text-white top-0 cursor-pointer mt-[-1.25rem]"
             weight="thin"
-            onClick={() => setIsEditModalOpen(true)}
+            onClick={openEditModal}
           />
           <span className="text-xl text-shadow-md">
             <div className="flex gap-4 items-center text-base relative">
