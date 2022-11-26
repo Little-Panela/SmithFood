@@ -1,17 +1,26 @@
+from app import app
+
+
+@app.route('/products', methods=['GET'])
 def list_all_products():
-    print('todos os produtos')
+    return 'todos os produtos'
 
-def list_one_product():
-    print('um produto')
+@app.route('/products/<id>', methods=['GET'])
+def list_one_product(id):
+    return f'um produto {id}'
 
-def create_product():
-    print('criar produto')
+@app.route('/products', methods=['POST'])
+def create_product(id):
+    return f'criar produto {id}'
 
-def update_product():
-    print('atualizar produto')
+@app.route('/products/<id>', methods=['PATCH'])
+def update_product(id):
+    return f'atualizar produto {id}'
 
-def delete_product():
-    print('deletar produto')
+@app.route('/products/<id>', methods=['DELETE'])
+def delete_product(id):
+    return f'deletar produto {id}'
 
-def increment_stock():
-    print('incrementar estoque')
+@app.route('/products/<id>/stock', methods=['PUT'])
+def increment_stock(id):
+    return f'incrementar estoque {id}'

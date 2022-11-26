@@ -1,5 +1,6 @@
 from setuptools import setup
-from modules.index import initApi
+
+from app import initApi
 
 setup(
     name='peeweeapi',
