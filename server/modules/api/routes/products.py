@@ -1,39 +1,46 @@
+import json
 from app import app
 
 from modules.database.models.Product import *
 from modules.database.models.Category import *
 
-from peewee import JOIN
+from flask import request, jsonify
 
 
 @app.route('/products', methods=['GET'])
 def list_all_products():
-    products = (Product
-                .select()
-                .dicts())
-    for i in products:
-        i["category"] = (Category
-                         .select()
-                         .where(Category.category_id == i["category"])
-                         .dicts()
-                         .get())
-    return list(products)
+    categories = (Category.select().dicts())
+    for i in categories:
+        try:
+            i["products"] = list(Product
+                                 .select()
+                                 .where(Product.category == i["category_id"])
+                                 .dicts())
+        except:
+            i["products"] = []
+    return list(categories)
 
 
 @app.route('/products/<p_id>', methods=['GET'])
 def list_one_product(p_id):
-    products = (Product
-                .select()
-                .where(Product.product_id == p_id)
-                .dicts())
-    return list(products)
+    product = (Product
+               .select()
+               .where(Product.product_id == p_id)
+               .dicts())
+    return list(product)
 
 
-@app.route('/products/<id>', methods=['PATCH'])
-def update_product(id):
-    return f'atualizar produto {id}'
+@app.route('/products/<p_id>/price', methods=['PATCH'])
+def update_product(p_id):
+    body = request.get_json()
+    Product.set_by_id(
+        p_id, {'sell_price': body["new_price"]})  # type: ignore
+    return list_one_product(p_id)
 
 
-@app.route('/products/<id>/stock', methods=['PUT'])
-def increment_stock(id):
-    return f'incrementar estoque {id}'
+@app.route('/products/<p_id>/stock', methods=['PUT'])
+def increment_stock(p_id):
+    body = request.get_json()
+    Product.set_by_id(
+        p_id, {'stock': stock + body["new_stock"]})  # type: ignore
+    return list_one_product(p_id)
