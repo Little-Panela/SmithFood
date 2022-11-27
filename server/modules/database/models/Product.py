@@ -1,11 +1,10 @@
 from modules.database.models.BaseModel import BaseModel
 from modules.database.models.Category import Category
 
-from peewee import *
-
+from peewee import AutoField, TextField, IntegerField, DoubleField, ForeignKeyField
 
 class Product(BaseModel):
-    product_id = UUIDField(primary_key=True)
+    product_id = AutoField()
     name = TextField()
     desc = TextField()
     sells = IntegerField()
@@ -15,6 +14,6 @@ class Product(BaseModel):
     category = ForeignKeyField(model=Category, backref='products')
 
     class Meta:
-        table_name = 'category'
+        table_name = 'product'
 
 Product.create_table()

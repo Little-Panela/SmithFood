@@ -1,5 +1,5 @@
 from modules.database.models.BaseModel import BaseModel
-from peewee import *
+from peewee import AutoField, TextField
 
 
 class Category(BaseModel):

@@ -1,6 +1,6 @@
 from flask import Flask
 
-from playhouse.migrate import *
+from playhouse.migrate import PostgresqlDatabase
 
 from psycopg2 import connect, extensions
 
@@ -23,14 +23,13 @@ db.init(database='smith-food')
 app = Flask(__name__)
 
 
-
 @app.before_request
 def _db_connect():
     db.connect()
 
 
 @app.before_request
-def _db_close(exc):
+def _db_close():
     if not db.is_closed():
         db.close()
 
