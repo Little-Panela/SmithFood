@@ -8,6 +8,7 @@ setup(
     install_requires=[
         'Flask',
         'Peewee',
+        'Sympy'
     ],
     readme='README.md',
     description='Peewee + Flask = <3',

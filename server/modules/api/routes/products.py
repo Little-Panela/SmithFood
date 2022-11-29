@@ -26,3 +26,7 @@ def update_product(p_id):
 @app.route('/products/<p_id>/stock', methods=['PUT'])
 def increment_stock(p_id):
     return product_service.increment_stock(p_id, request.get_json()["new_stock"]) # type: ignore
+
+@app.route('/products/<p_id>/minstock', methods=['GET'])
+def get_min_stock_and_price(p_id):
+    return product_service.get_min_stock_and_price(p_id)
