@@ -39,13 +39,15 @@ class ProductService():
     def get_min_stock_and_price(self, p_id):
         product = self.list_one_product(p_id)
         x = symbols('x')
-        demand_equation = x**2 + 70*x + product[0].production_price*100
+        demand_equation = x**2 + 90*x + product[0]["production_price"]
         # x is our stock quantity, and the production price is the sum of all impact costs like tech, transport, re-sell, etc...
         # x² defines how lucrative it will be
-        # 70x defines how much it will produce
-        price = round(minimum(demand_equation, x)/100, 2)
-        quantity = round(solve(Eq(demand_equation, price), x)/100, 2)
-        return {"price": price, "quantity": quantity}
+        # 70x defines the % of sell
+        price = round(minimum(demand_equation, x), 2) * -1
+        if price <= product[0]["production_price"]:
+            price = price + product[0]["production_price"]
+        quantity = round(solve(Eq(demand_equation, price), x)[0]) * -1
+        return dict({"price": float(price/100), "quantity": int(quantity)})
         
 
 

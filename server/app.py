@@ -33,4 +33,5 @@ def _db_close():
     if not db.is_closed():
         db.close()
 
+
 import modules.api.routes.products
