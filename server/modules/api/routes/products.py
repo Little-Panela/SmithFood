@@ -20,7 +20,7 @@ def list_one_product(p_id):
 
 @app.route('/products/<p_id>/price', methods=['PATCH'])
 def update_product(p_id):
-    return return product_service.update_product(p_id, request.get_json()["new_price"]) # type: ignore
+    return product_service.update_product(p_id, request.get_json()["new_price"]) # type: ignore
 
 
 @app.route('/products/<p_id>/stock', methods=['PUT'])

@@ -7,6 +7,7 @@ class Product(BaseModel):
     product_id = AutoField()
     name = TextField()
     desc = TextField()
+    img_url = TextField()
     sells = IntegerField()
     stock = IntegerField()
     sell_price = DoubleField()
