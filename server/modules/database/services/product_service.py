@@ -45,7 +45,7 @@ class ProductService():
         # 70x defines how much it will produce
         price = round(minimum(demand_equation, x)/100, 2)
         quantity = round(solve(Eq(demand_equation, price), x)/100, 2)
-        return [quantity, price]
+        return {"price": price, "quantity": quantity}
         
 
 
