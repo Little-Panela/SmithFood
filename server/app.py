@@ -34,4 +34,12 @@ def _db_close():
         db.close()
 
 
+@app.after_request 
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    # Other headers can be added here if needed
+    return response
+
+
 import modules.api.routes.products

@@ -21,16 +21,17 @@ export function MenuColumn({
       <ul className="flex flex-col gap-2">
         {menuItems.map((item) => (
           <MenuItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            image={item.image}
+            key={item.product_id}
+            product_id={item.product_id}
+            name={item.name}
+            sell_price={item.sell_price}
+            img_url={item.img_url}
             stock={item.stock}
             sells={item.sells}
             setIsEditModalOpen={setIsEditModalOpen}
-            setSelectedItem={setSelectedItem}
-          />
+            setSelectedItem={setSelectedItem} 
+            desc={item.desc}
+            />
         ))}
       </ul>
     </div>

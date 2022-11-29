@@ -1,61 +1,51 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { EditItemModal } from "./components/EditItemModal";
 import { MenuColumn } from "./components/Menu";
 import { MenuItemData } from "./components/MenuItem";
 
-const menuItems = [
-  {
-    id: "1",
-    image:
-      "https://www.tastingtable.com/img/gallery/the-best-coffee-shop-in-every-state/intro-1639519645.jpg",
-    title: "Café",
-    price: 5,
-    stock: 10,
-    sells: 0,
-  },
-  {
-    id: "2",
-    image:
-      "https://www.tastingtable.com/img/gallery/the-best-coffee-shop-in-every-state/intro-1639519645.jpg",
-    title: "Café com leite",
-    price: 7,
-    stock: 10,
-    sells: 3,
-  },
-  {
-    id: "3",
-    image:
-      "https://www.tastingtable.com/img/gallery/the-best-coffee-shop-in-every-state/intro-1639519645.jpg",
-    title: "Café Premium",
-    price: 10,
-    stock: 4,
-    sells: 2,
-  },
-];
+
+type CategoryItemsData = {
+  category_id: number;
+  name: string;
+  products: MenuItemData[]
+}
 
 function App() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({} as MenuItemData);
+  const [menuItems, setMenuItems] = useState([] as CategoryItemsData[])
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/products')
+    .then( res => setMenuItems(res.data) )
+  }, [])
 
   return (
     <main className="area min-h-fit flex flex-col items-center gap-5">
       <h1 className="font-handWritten text-6xl mt-12">SmithFood</h1>
       <div className="flex gap-12 mt-16 flex-wrap items-center justify-center">
         <MenuColumn
-          menuItems={menuItems}
+          menuItems={menuItems[0].products}
           label="Entradas"
           setIsEditModalOpen={setIsEditModalOpen}
           setSelectedItem={setSelectedItem}
         />
         <MenuColumn
-          menuItems={menuItems}
+          menuItems={menuItems[1].products}
           label="Pratos"
           setIsEditModalOpen={setIsEditModalOpen}
           setSelectedItem={setSelectedItem}
         />
         <MenuColumn
-          menuItems={menuItems}
+          menuItems={menuItems[2].products}
           label="Bebidas"
+          setIsEditModalOpen={setIsEditModalOpen}
+          setSelectedItem={setSelectedItem}
+        />
+        <MenuColumn
+          menuItems={menuItems[3].products}
+          label="Sobremesas"
           setIsEditModalOpen={setIsEditModalOpen}
           setSelectedItem={setSelectedItem}
         />
