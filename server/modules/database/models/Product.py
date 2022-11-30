@@ -1,7 +1,8 @@
 from modules.database.models.BaseModel import BaseModel
 from modules.database.models.Category import Category
+from peewee import (AutoField, DoubleField, ForeignKeyField, IntegerField,
+                    TextField)
 
-from peewee import AutoField, TextField, IntegerField, DoubleField, ForeignKeyField
 
 class Product(BaseModel):
     product_id = AutoField()
@@ -16,5 +17,6 @@ class Product(BaseModel):
 
     class Meta:
         table_name = 'product'
+
 
 Product.create_table()

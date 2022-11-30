@@ -17,38 +17,24 @@ function App() {
   const [menuItems, setMenuItems] = useState([] as CategoryItemsData[])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/products')
-    .then( res => setMenuItems(res.data) )
+    fetch("http://localhost:5000/products").then(res => {
+      res.json().then(res => setMenuItems(res)
+      );
+    })
   }, [])
 
   return (
     <main className="area min-h-fit flex flex-col items-center gap-5">
       <h1 className="font-handWritten text-6xl mt-12">SmithFood</h1>
       <div className="flex gap-12 mt-16 flex-wrap items-center justify-center">
-        <MenuColumn
-          menuItems={menuItems[0].products}
-          label="Entradas"
-          setIsEditModalOpen={setIsEditModalOpen}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuColumn
-          menuItems={menuItems[1].products}
-          label="Pratos"
-          setIsEditModalOpen={setIsEditModalOpen}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuColumn
-          menuItems={menuItems[2].products}
-          label="Bebidas"
-          setIsEditModalOpen={setIsEditModalOpen}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuColumn
-          menuItems={menuItems[3].products}
+        {menuItems.map(cat => 
+          <MenuColumn
+          menuItems={cat.products}
           label="Sobremesas"
           setIsEditModalOpen={setIsEditModalOpen}
           setSelectedItem={setSelectedItem}
         />
+        )}
       </div>
       <EditItemModal
         isOpen={isEditModalOpen}

@@ -9,4 +9,5 @@ class Category(BaseModel):
     class Meta:
         table_name = 'category'
 
+
 Category.create_table()

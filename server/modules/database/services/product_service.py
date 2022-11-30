@@ -1,7 +1,7 @@
-from modules.database.models.Product import Product
 from modules.database.models.Category import Category
+from modules.database.models.Product import Product
+from sympy import Eq, minimum, solve, symbols
 
-from sympy import symbols, Eq, solve, minimum
 
 class ProductService():
     def __init__(self) -> None:
@@ -35,7 +35,7 @@ class ProductService():
         Product.set_by_id(
             p_id, {'stock': stock + new_stock})  # type: ignore
         return self.list_one_product(p_id)
-    
+
     def get_min_stock_and_price(self, p_id):
         product = self.list_one_product(p_id)
         x = symbols('x')
@@ -48,7 +48,6 @@ class ProductService():
             price = price + product[0]["production_price"]
         quantity = round(solve(Eq(demand_equation, price), x)[0]) * -1
         return dict({"price": float(price/100), "quantity": int(quantity)})
-        
 
 
 product_service = ProductService()
