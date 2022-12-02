@@ -21,6 +21,7 @@ virtualenv . && pip install sympy peewee psycopg2-binary && pip install -U Flask
 After that, start up your database by:
 1. Check host, user and password on [app.py](https://github.com/Little-Panela/SmithFood/blob/master/server/app.py)
 2. Change in case you need
+3. By accessing psql cli in your terminal, use the [seeder commands](https://github.com/Little-Panela/SmithFood/blob/master/server/seed.sql) to seed you database
 
 And then finally use:
 ```sh
