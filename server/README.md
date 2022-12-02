@@ -7,7 +7,6 @@
 - [Peewee](https://pypi.org/project/peewee/)
 - [Psycopg2](https://pypi.org/project/psycopg2/)
 - [Flask](https://pypi.org/project/flask/)
-- [Flask-Cors](https://pypi.org/project/flask-cors/)
 
 - [PostgreSQL](https://www.postgresql.org/)
 
@@ -16,7 +15,7 @@
 Install virtualenv: `pip install virtualenv`
 Then start virtualenv to install all dependencies:
 ```sh
-virtualenv . && pip install sympy peewee psycopg2-binary Flask Flask-cors
+virtualenv . && pip install sympy peewee psycopg2-binary && pip install -U Flask
 ```
 
 After that, start up your database by:
