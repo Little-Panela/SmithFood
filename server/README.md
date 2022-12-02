@@ -32,7 +32,7 @@ PS:
 If in your terminal says: "Db exists", its ok !
 
 ## Routes:
-´´´
+```
 - /products
   |- / -> GET -> returns all products by category
   |- /:id
@@ -40,11 +40,10 @@ If in your terminal says: "Db exists", its ok !
     |- /stock -> PUT -> increments stock by value recieved in body request
     |- /price -> PATCH -> update sell_price by value recieved in body request
     |- /minstock -> GET -> returns most optimized stock and price to that product
-´´´
-
+```
 ## Schemas:
-´´´
+```
 - /stock -> body: {"new_stock": <number>}
 - /price -> body: {"new_price": <double>}
-´´´
+```
 
