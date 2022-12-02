@@ -4,6 +4,7 @@ from psycopg2 import connect, extensions
 
 autocommit = extensions.ISOLATION_LEVEL_AUTOCOMMIT
 
+#Checks if db exists if not create a new one
 try:
     conn = connect(dbname='postgres', user='postgres', host='localhost',
                    password='postgres')
@@ -31,7 +32,7 @@ def _db_close():
     if not db.is_closed():
         db.close()
 
-
+#CORS
 @app.after_request
 def after_request(response):
     header = response.headers
